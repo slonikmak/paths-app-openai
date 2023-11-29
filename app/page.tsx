@@ -8,28 +8,44 @@ export default function Home() {
 
   const [response, setResponse] = useState<string | undefined>("")
 
-  async function chatCompletion() {
-    /*const res = await openai.chat.completions.create({
-      messages: [{role: 'user', content: 'Say some things'}],
-      model: 'gpt-3.5-turbo',
-    });*/
+    async function chatCompletion() {
 
-      console.log("Click")
+        console.log("Click")
 
-      const response = await fetch("/api", {
-          method: "GET",
-          headers: {
-              "Content-Type": "application/json",
-          }
+        const response = await fetch("/api", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
 
-      });
+        });
 
-      const data = await response.json();
+        //const data = await response.json();
 
-    console.log(data)
+        if (!response.body) {
+            console.error("No response body");
+            return;
+        }
 
-    setResponse(data)
-  }
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let result = '';
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) {
+                break;
+            }
+            result += decoder.decode(value, { stream: true });
+        }
+
+        result += decoder.decode(); // End of stream
+
+        console.log(result)
+
+
+        setResponse(result.replace('First Chunk ', '').trim())
+    }
 
 
 
