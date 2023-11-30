@@ -44,7 +44,7 @@ export default function Home() {
         console.log(result)
 
 
-        setResponse(result.replace('First Chunk ', '').trim())
+        setResponse(result.split("link:")[1].trim())
     }
 
 

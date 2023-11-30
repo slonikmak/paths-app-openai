@@ -46,7 +46,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
         result += decoder.decode(); // End of stream
         console.log(result)
-        setResponse(result.replace(`First Chunk ${params.slug}`, '').trim())
+        setResponse(result.split("link:")[1].trim())
         setIsLoading(false)
     }
 

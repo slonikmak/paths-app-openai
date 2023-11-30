@@ -14,8 +14,8 @@ export async function GET(request: Request,
     const encoder = new TextEncoder();
     const customReadable = new ReadableStream({
         async start(controller) {
-            // Enqueue the first chunk
-            controller.enqueue(encoder.encode(`First Chunk ${params.slug}`));
+
+            controller.enqueue(encoder.encode(`Waiting for a ChatGPT response...`));
 
             const completion = await openai.chat.completions.create(createChatPrompt(prompts[params.slug]));
 
@@ -23,12 +23,14 @@ export async function GET(request: Request,
 
             console.log(resultPrompt.replace("Prompt for DALLE-3:", ""))
 
+            controller.enqueue(encoder.encode(`Waiting for a DALLE response...`));
+
             const res = await openai.images.generate(createImgPrompt(resultPrompt))
 
             console.log(res)
 
 
-            controller.enqueue(encoder.encode(res.data[0].url));
+            controller.enqueue(encoder.encode("link:" + res.data[0].url));
 
             controller.close();
 
