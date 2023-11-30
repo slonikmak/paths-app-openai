@@ -72,7 +72,6 @@ export const createChatPrompt = (fillings: string): ChatCompletionCreateParamsNo
 6. Incorporate Action or Movement: If you want a dynamic image, describe actions or movements. For instance, “a cat jumping over a fence” is more dynamic than just “a cat.”
 7. Avoid Overloading the Prompt: While details are good, too many can confuse the AI. Try to strike a balance between being descriptive and being concise.
 8. Specify Desired Styles or Themes: For example, “cyberpunk,” “art deco,”, “minimalist, "natural photo" or else. Style should be determined by the feelings and thoughts conveyed in the request.”
-9. Try to be shortly. The resulting Prompt must be length 1000 or less.
 The  description of the place:
 This is the description of Mount Rumia:
 Mount Rumia is the highest mountain in the Bar region of Montenegro. Legends are told about many mountains of Montenegro. Most often they do not go beyond the immediate area. But there are peaks that literally everyone has heard of. And probably the most famous is Mount Rumia. It is not for nothing that the city of Bar, next to which it is located, is often called “the city of Rumia”. And this glory stretches into the depths of centuries, because for 900 years there has been a tradition of pilgrimage to the peak. The views from there in all directions are absolutely fantastic (they say that in favorable weather conditions you can see the Italian coast! - I was unlucky, I didn’t see it...), and therefore it deserves a visit, even if we ignore the historical and cultural significance.

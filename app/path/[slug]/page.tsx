@@ -41,7 +41,13 @@ export default function Page({ params }: { params: { slug: string } }) {
             if (done) {
                 break;
             }
-            result += decoder.decode(value, { stream: true });
+
+            const str = decoder.decode(value, { stream: true });
+            console.log(str);
+            if (str.startsWith("Waiting")) {
+                setResponse(str)
+            }
+            result += str;
         }
 
         result += decoder.decode(); // End of stream
@@ -53,6 +59,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     return (
         <main className={styles.main}>
             {isLoading ? (
+                <>
                 <FadeLoader
                     color={"blue"}
                     loading={isLoading}
@@ -60,6 +67,8 @@ export default function Page({ params }: { params: { slug: string } }) {
                     aria-label="Loading Spinner"
                     data-testid="loader"
                 />
+                    <div>{response}</div>
+                </>
             ) : (
                 <div>
                     <img src={response} alt="Generated image" width={"100%"} height={"100%"}/>
