@@ -71,16 +71,16 @@ export const createChatPrompt = (fillings: string): ChatCompletionCreateParamsNo
 5. Specify Lighting and Time of Day: Lighting can dramatically change the mood of an image. Specify if it’s day or night, sunny or cloudy, or if there’s a specific light source like candlelight or neon lights.
 6. Incorporate Action or Movement: If you want a dynamic image, describe actions or movements. For instance, “a cat jumping over a fence” is more dynamic than just “a cat.”
 7. Avoid Overloading the Prompt: While details are good, too many can confuse the AI. Try to strike a balance between being descriptive and being concise.
-8. Use Analogies or Comparisons: Sometimes it helps to compare what you want with something well-known, like “in the style of Van Gogh” or “resembling a scene from a fantasy novel.”
-9. Specify Desired Styles or Themes: For example, “cyberpunk,” “art deco,”, “minimalist, "natural photo" or else. Style should be determined by the feelings and thoughts conveyed in the request.”
+8. Specify Desired Styles or Themes: For example, “cyberpunk,” “art deco,”, “minimalist, "natural photo" or else. Style should be determined by the feelings and thoughts conveyed in the request.”
+9. Try to be shortly. The resulting Prompt must be length 1000 or less.
 The  description of the place:
 This is the description of Mount Rumia:
-Mount Rumia (1594 m above sea level) is the highest mountain in the Bar region of Montenegro. Ascent from 964 m above sea level, i.e. total elevation gain is 630 m. Route length is 2.2 km. Legends are told about many mountains of Montenegro. Most often they do not go beyond the immediate area. But there are peaks that literally everyone has heard of. And probably the most famous is Mount Rumia. It is not for nothing that the city of Bar, next to which it is located, is often called “the city of Rumia”. And this glory stretches into the depths of centuries, because for 900 years there has been a tradition of pilgrimage to the peak. The views from there in all directions are absolutely fantastic (they say that in favorable weather conditions you can see the Italian coast! - I was unlucky, I didn’t see it...), and therefore it deserves a visit, even if we ignore the historical and cultural significance.
+Mount Rumia is the highest mountain in the Bar region of Montenegro. Legends are told about many mountains of Montenegro. Most often they do not go beyond the immediate area. But there are peaks that literally everyone has heard of. And probably the most famous is Mount Rumia. It is not for nothing that the city of Bar, next to which it is located, is often called “the city of Rumia”. And this glory stretches into the depths of centuries, because for 900 years there has been a tradition of pilgrimage to the peak. The views from there in all directions are absolutely fantastic (they say that in favorable weather conditions you can see the Italian coast! - I was unlucky, I didn’t see it...), and therefore it deserves a visit, even if we ignore the historical and cultural significance.
 My thoughts and feelings:
 I am climbing to the Mount Rumia.
 ${fillings}`}
         ],
             model: "gpt-4",
-        temperature: 2
+        temperature: 1.2
     }
 }
