@@ -29,6 +29,8 @@ export default function Page({ params }: { params: { slug: string } }) {
 
         if (!response.body) {
             console.error("No response body");
+            setIsLoading(false);
+            setResponse("Something went wrong. Please retry.")
             return;
         }
 
@@ -48,6 +50,13 @@ export default function Page({ params }: { params: { slug: string } }) {
                 setResponse(str)
             }
             result += str;
+        }
+
+        if(!response.ok) {
+            console.error("Not ok");
+            setIsLoading(false);
+            setResponse("Something went wrong. Please retry.")
+            return;
         }
 
         result += decoder.decode(); // End of stream
