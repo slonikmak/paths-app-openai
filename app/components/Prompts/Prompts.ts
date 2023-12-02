@@ -22,7 +22,7 @@ export const prompts: { [key: string]: string } = {
     "9":"The final push to the top takes forever. The body refuses to increase the pace; it moves on its own, as do the thoughts in the head.",
     "99":"Последний рывок до вершины тянется бесконечно долго. Тело отказывается увеличить темп, оно двигается само по себе как и мысли в голове.",
     "10": "I briefly enjoy the play of clouds at the top and run down empty and light.",
-    "101": "Недолго наслаждаюсь игрой облаков на вершине и пустой и лёгкий бегу вниз."
+    "1010": "Недолго наслаждаюсь игрой облаков на вершине и пустой и лёгкий бегу вниз."
 }
 
 export const createImgPrompt = (prompt: string): ImageGenerateParams => {

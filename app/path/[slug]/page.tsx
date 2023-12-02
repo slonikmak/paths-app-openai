@@ -10,6 +10,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
     const [response, setResponse] = useState<string>("")
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [prompt, setPrompt] = useState<string>("")
 
     useEffect(() => {
         chatCompletion()
@@ -17,14 +18,22 @@ export default function Page({ params }: { params: { slug: string } }) {
 
     async function chatCompletion() {
 
-        console.log("Click")
+        const promptResponse = await fetch(`/api/prompt/${params.slug}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+
+        const promptResult = await promptResponse.text()
+
+        setPrompt(promptResult)
 
         const response = await fetch(`/api/path/${params.slug}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
             }
-
         });
 
         if (!response.body) {
@@ -47,7 +56,13 @@ export default function Page({ params }: { params: { slug: string } }) {
             const str = decoder.decode(value, { stream: true });
             console.log(str);
             if (str.startsWith("Waiting")) {
-                setResponse(str)
+
+                if (str.includes("ChatGPT")) {
+                    setResponse("Waiting for a ChatGPT response...");
+                } else if (str.includes("DAL")) {
+                    setResponse("Waiting for a DALLE response...")
+                }
+
             }
             result += str;
         }
@@ -76,7 +91,8 @@ export default function Page({ params }: { params: { slug: string } }) {
                     aria-label="Loading Spinner"
                     data-testid="loader"
                 />
-                    <div>{response}</div>
+                    <div className={styles.prompt} >{prompt}</div>
+                    <div className={styles.status}>{response}</div>
                 </>
             ) : (
                 <div>
