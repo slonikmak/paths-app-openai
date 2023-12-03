@@ -10,13 +10,32 @@ export default function Page({ params }: { params: { slug: string } }) {
 
     const [response, setResponse] = useState<string>("")
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [isError, setIsError] = useState<boolean>(false)
     const [prompt, setPrompt] = useState<string>("")
 
     useEffect(() => {
         chatCompletion()
     },[])
 
+    function error(msg: string) {
+        setIsLoading(false)
+        setIsError(true)
+        setResponse(msg)
+    }
+
     async function chatCompletion() {
+
+        try {
+            const num = parseInt(params.slug)
+            if (num < 1 || num > 10) {
+                error("This page does not exist.")
+                return;
+            }
+        } catch (e) {
+            console.log(e)
+            error("Something went wrong. Please retry.")
+            return;
+        }
 
         const promptResponse = await fetch(`/api/prompt/${params.slug}`, {
             method: "GET",
@@ -37,9 +56,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         });
 
         if (!response.body) {
-            console.error("No response body");
-            setIsLoading(false);
-            setResponse("Something went wrong. Please retry.")
+            error("Something went wrong. Please retry.");
             return;
         }
 
@@ -68,9 +85,8 @@ export default function Page({ params }: { params: { slug: string } }) {
         }
 
         if(!response.ok) {
-            console.error("Not ok");
-            setIsLoading(false);
-            setResponse("Something went wrong. Please retry.")
+            console.log("Not ok")
+            error("Something went wrong. Please retry.");
             return;
         }
 
@@ -79,6 +95,17 @@ export default function Page({ params }: { params: { slug: string } }) {
         setResponse(result.split("link:")[1].trim())
         setIsLoading(false)
     }
+
+    if (isError) {
+        return (
+            <main className={styles.main}>
+            <div className={styles.error}> {/* You need to define this error style */}
+                {response}
+            </div>
+            </main>
+        );
+    }
+
 
     return (
         <main className={styles.main}>

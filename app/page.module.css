@@ -44,6 +44,17 @@
   min-height: 50px; /* Ensures that the div has height even if empty */
 }
 
+.error {
+  color: red; /* Error message color */
+  background-color: #fee; /* Light red background color */
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.2rem; /* Larger text for visibility */
+  border: 1px solid #f5c6cb; /* Light red border */
+}
+
 .description {
   display: inherit;
   justify-content: inherit;
